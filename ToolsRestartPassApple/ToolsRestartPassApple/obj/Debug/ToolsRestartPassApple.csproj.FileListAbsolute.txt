@@ -55,3 +55,60 @@ E:\source\tu hoc\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MimeKit.x
 E:\source\tu hoc\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Formats.Asn1.xml
 E:\source\tu hoc\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.Support.dll
 E:\source\tu hoc\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.Support.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\selenium-manager\linux\selenium-manager
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\selenium-manager\macos\selenium-manager
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\selenium-manager\windows\selenium-manager.exe
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\BouncyCastle.Cryptography.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Flurl.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Flurl.Http.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Leaf.xNet.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MailKit.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MimeKit.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Newtonsoft.Json.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Buffers.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Data.SQLite.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Formats.Asn1.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Memory.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Numerics.Vectors.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Text.Encodings.Web.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Text.Json.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.ValueTuple.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.Support.dll
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\BouncyCastle.Cryptography.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Flurl.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Flurl.Http.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Leaf.xNet.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MailKit.pdb
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MailKit.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MailKit.dll.config
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MimeKit.pdb
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\MimeKit.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Newtonsoft.Json.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Buffers.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Data.SQLite.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Formats.Asn1.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Memory.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Numerics.Vectors.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Text.Encodings.Web.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Text.Json.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\System.ValueTuple.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\WebDriver.Support.xml
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRestartPassApple.csproj.AssemblyReference.cache
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRestartPassApple.Form1.resources
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRestartPassApple.Properties.Resources.resources
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRestartPassApple.csproj.GenerateResource.cache
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRestartPassApple.csproj.CoreCompileInputs.cache
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\ToolsRes.BE85F26C.Up2Date
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Auto Recover Pass Apple.exe.config
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Auto Recover Pass Apple.exe
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\bin\Debug\Auto Recover Pass Apple.pdb
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\Auto Recover Pass Apple.exe
+C:\C#\RecoverAppleAccount\Tools\ToolsRestartPassApple\ToolsRestartPassApple\obj\Debug\Auto Recover Pass Apple.pdb

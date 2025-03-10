@@ -29,6 +29,11 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.BiDi.Modules.Network;
 using System.Reflection;
+using Org.BouncyCastle.Tls;
+using System.Drawing.Printing;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using System.Diagnostics;
+using System.Linq.Expressions;
 
 
 
@@ -46,11 +51,24 @@ namespace ToolsRestartPassApple
         {
             InitializeComponent();
             so_luong = (int)soluong.Value;
+            this.FormClosing += this.fmain_FormClosing;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                string data = File.ReadAllText("config.txt");
+                soluong.Value = Convert.ToInt16(data.Split('|')[0]);
+                API_key.Text = data.Split('|')[1];
+                password.Text = data.Split('|')[2];
+                randompasscheck.Checked = Convert.ToBoolean(data.Split('|')[3]);
+                cau_trl1.Text = data.Split('|')[4];
+                cau_trl2.Text = data.Split('|')[5];
+                cau_trl3.Text = data.Split('|')[6];
+            }
+            catch { }
         }
 
         private List<string> mails = new List<string>();
@@ -60,335 +78,507 @@ namespace ToolsRestartPassApple
         private bool StopThread;
         private int so_luong_da_chay;
         private List<string> listmailcheck = new List<string>();
+        public string Output = "";
+        private int soluongdangchay = 0;
 
-
-
-
-        private async void bnt_start_Click(object sender, EventArgs e)
+        private void fmain_FormClosing(Object sender, FormClosingEventArgs e)
         {
-            int so_luong = (int)soluong.Value; // Số luồng tối đa
-            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-            string folderPath = Path.Combine("output", timestamp);
-
-            // Tạo thư mục nếu chưa tồn tại
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            SemaphoreSlim semaphore = new SemaphoreSlim(so_luong);
-            List<Task> tasks = new List<Task>();
-
-            for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
+            DialogResult d = MessageBox.Show("Bạn có chắc chắn muốn thoát ứng dụng?", "Thông báo ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (d == DialogResult.No)
+                e.Cancel = true;
+            else
             {
-                
-                    string mail = dataGridView1.Rows[i].Cells["Mail"].Value.ToString().Trim();
-                    string password = dataGridView1.Rows[i].Cells["Pass"].Value.ToString().Trim();
+                string data = $"{soluong.Value}|{API_key.Text}|{password.Text}|{randompasscheck.Checked}|{cau_trl1.Text}|{cau_trl2.Text}|{cau_trl3.Text}";
 
-                tasks.Add(Task.Run(async () =>
-                {
-                    await semaphore.WaitAsync(); // Đợi slot trống
-                    try
-                    {
-                        await OpenChrome(i, mail, password, folderPath);
-                    }
-                    finally
-                    {
-                        semaphore.Release(); 
-                    }
-                }));
+                // Xóa nội dung cũ và ghi nội dung mới
+                File.WriteAllText("config.txt", data);
 
-
+                Environment.Exit(0);
             }
-
-            await Task.WhenAll(tasks); // Đợi tất cả task hoàn thành
-
-            MessageBox.Show("Hoàn thành xử lý tất cả email", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
-
-
-
-        private async Task OpenChrome(int i, string mail, string pass, string folderPath)
+        private void bnt_start_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show($"Vui lòng thêm Account", "HP Tools");
+                return;
+            }
+            int yy = 0;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value))
+                {
+                    yy++;
+                    break;
+                }
+            }
+            if (yy == 0)
+            {
+                MessageBox.Show("Vui lòng chọn mail cần chạy", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            string DateFormat = DateTime.Now.ToString("dd-MM-yyy hh-mm-ss");
+            Output = Application.StartupPath + @"\Output\Result " + DateFormat;
+            if (!Directory.Exists(Output))
+            {
+                Directory.CreateDirectory(Output);
+            }
+            soluongdangchay = 0;
+            StopThread = false;
+            bnt_start.Enabled = false;
+            Thread a = new Thread(() =>
+            {
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value))
+                    {
+                        if (StopThread)
+                        {
+                            break;
+                        }
+                        while (!StopThread)
+                        {
+                            if (soluongdangchay < (int)soluong.Value)
+                            {
+                                break;
+                            }
+                            Thread.Sleep(500);
+                        }
+                        HamChay(i, dataGridView1.Rows[i].Cells["Mail"].Value.ToString(), dataGridView1.Rows[i].Cells["Pass"].Value.ToString(), Output);
+                        soluongdangchay++;
+                        Thread.Sleep(500);
+                    }
+                }
+                while (!StopThread)
+                {
+                    Thread.Sleep(1000);
+                    if (soluongdangchay <= 0)
+                    {
+                        break;
+                    }
+                }
+                GC.SuppressFinalize(this);
+                GC.WaitForFullGCApproach();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                base.Invoke(new MethodInvoker(delegate ()
+                {
+                    bnt_start.Enabled = true;
+                }));
+            });
+            a.Start();
+            a.IsBackground = true;
+        }
+        private void SaveDatatoTxt(string path, string content)
         {
             try
             {
-                string new_password = password.Text;
-                dataGridView1.Rows[i].Cells[3].Value = "Bắt đầu";
+                Invoke(new MethodInvoker(delegate ()
+                {
+                    File.AppendAllText(path, content + "\r\n");
+                }));
+            }
+            catch { }
+        }
+        private string RandomPassword(int lengthLetters, int lengthDigits)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string numbers = "0123456789";
+            Random random = new Random();
 
+            string letters = new string(Enumerable.Repeat(chars, lengthLetters)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            string digits = new string(Enumerable.Repeat(numbers, lengthDigits)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            string password = letters + digits;
+
+            // Xáo trộn mật khẩu để không có chữ số luôn ở cuối
+            return new string(password.ToCharArray().OrderBy(x => random.Next()).ToArray());
+        }
+        private string ReverseProxy(string proxy)
+        {
+            if (proxy.Contains("@"))
+            {
+                // proxy dạng username:password@host:port
+                var parts = proxy.Split('@');
+                var credentials = parts[0].Split(':');
+                var hostPort = parts[1];
+
+                if (credentials.Length == 2)
+                {
+                    var username = credentials[0];
+                    var password = credentials[1];
+                    return $"{hostPort}:{username}:{password}";
+                }
+            }
+            return proxy;
+        }
+        void HamChay(int i, string mail, string pass, string folderPath)
+        {
+            Thread thread = new Thread(() => 
+            {
                 ChromeOptions options = new ChromeOptions();
                 options.AddArgument("--window-size=100,600");
                 options.AddArgument("--disable-notifications");
                 options.AddExcludedArgument("enable-automation");
                 options.AddArgument("--log-level=3");
 
+                int max_width = Screen.PrimaryScreen.Bounds.Width;
+                int max_height = Screen.PrimaryScreen.Bounds.Height;
+                int chromeWidth = max_width / (int)Chieudai.Value;
+                int chromeHeight = max_height / (int)Chieurong.Value;
+                string chromesize = $"--window-size={chromeWidth},{chromeHeight}";
+                options.AddArgument(chromesize);
+                int width = chromeWidth;
+                int height = chromeHeight;
+                int distance_x = chromeWidth - 15;
+                int distance_y = chromeHeight - 10;
+                int max_column = (max_width - width) / distance_x + 1;
+                int max_row = (max_height - height) / distance_y + 1;
+                int row = (i % max_column == 0) ? (((i / max_column) % max_row == 0) ? (i / max_column) % max_row + 1 : (i / max_column) % max_row) : (i / max_column) % max_row + 1;
+                int column = (i % max_column == 0) ? max_column : i % max_column;
+                int margin_width_postion = (column - 1) * distance_x;
+                int margin_height_position = (row - 1) * distance_y;
+                string position = $"--window-position={margin_width_postion},{margin_height_position}";
+                options.AddArgument(position);
+                string proxy = "";
+                if (proxyList.Count > 0)
+                {
+                    proxy = proxyList[(i / 1) % proxyList.Count];
+                    proxy = ReverseProxy(proxy);
+                    dataGridView1.Rows[i].Cells["Proxy"].Value = proxy;
+                }
+                try
+                {
+                    int count = Regex.Matches(proxy, ':'.ToString()).Count;
+                    if (count == 3)
+                    {
+                        string host = proxy.Split(':')[0];
+                        string port = proxy.Split(':')[1];
+                        string fileproxyauth = Directory.GetCurrentDirectory() + "\\Proxy Auto Auth.crx";
+                        options.AddExtension(fileproxyauth);
+                        options.AddArgument($"--proxy-server={host}:{port}");
+                    }
+                    else
+                    {
+                        options.AddArgument($"--proxy-server={proxy}");
+                    }
+                }
+                catch { }
+
                 ChromeDriverService service = ChromeDriverService.CreateDefaultService();
                 service.HideCommandPromptWindow = true;
 
                 IWebDriver driver = new ChromeDriver(service, options);
-                driver.Navigate().GoToUrl("https://iforgot.apple.com/password/verify/appleid?language=vi_VN");
 
-                await Task.Delay(1000);
-                driver.FindElement(By.XPath("//input[contains(@class, 'iforgot-apple-id')]")).SendKeys(mail);
-                await Task.Delay(1000);
-                dataGridView1.Rows[i].Cells[3].Value = "Giải captcha";
-
-                string apiKey = API_key.Text;
-
-                int maxAttempts = 5;
-                bool captchaSolved = false;
-
-
-                for (int attempt = 1; attempt <= maxAttempts; attempt++)
+                try
                 {
-                    dataGridView1.Rows[i].Cells[3].Value = $"Giải captcha - Lần {attempt}";
-
-                    // Lấy ảnh CAPTCHA
-                    IWebElement imgElement = driver.FindElement(By.XPath("//img[contains(@alt, 'Thử thách bằng ảnh')]"));
-                    string imageSrc = imgElement.GetAttribute("src");
-
-                    // Giải CAPTCHA
-                    string taskid = SolveCaptcha.Create2captchTask(apiKey, imageSrc);
-                    Thread.Sleep(5000); // Chờ API trả về kết quả
-                    string captchaCode = SolveCaptcha.Result2captchTask(apiKey, taskid);
-
-                    // Nhập CAPTCHA
-                    IWebElement captchaInput = driver.FindElement(By.XPath("//input[contains(@class, 'captcha-input')]"));
-                    captchaInput.Clear();
-                    captchaInput.SendKeys(captchaCode);
-                    dataGridView1.Rows[i].Cells[4].Value = captchaCode;
-
-                    await Task.Delay(3000);
-
-                    // Bấm nút tiếp tục
-                    driver.FindElement(By.XPath("//button[contains(@class, 'nav-action') and contains(@class, 'button-primary')]")).Click();
-                    await Task.Delay(3000);
-
-                    // Kiểm tra xem CAPTCHA có sai không
-                    try
+                    int count = Regex.Matches(proxy, ':'.ToString()).Count;
+                    if (count == 3)
                     {
-                        IWebElement errorElement = driver.FindElement(By.XPath("//span[contains(@class, 'form-message')]"));
-                        if (errorElement.Displayed)
-                        {
-                            // CAPTCHA sai, cần thử lại
-                            dataGridView1.Rows[i].Cells[3].Value = $"CAPTCHA sai - Thử lại";
-                        }
-                    }
-                    catch (NoSuchElementException)
-                    {
-                        // Không tìm thấy thông báo lỗi => CAPTCHA đúng
-                        dataGridView1.Rows[i].Cells[3].Value = "CAPTCHA chính xác";
-                        captchaSolved = true; // Đặt cờ thành true
-                        break; // Thoát khỏi vòng lặp
-                    }
-
-                    if (captchaSolved) //Thoát ra khỏi vòng lặp nếu captcha đã được giải quyết.
-                    {
-                        break;
-                    }
-                }
-
-                // Kiểm tra nếu sau 10 lần vẫn sai
-                if (!captchaSolved)
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Giải CAPTCHA thất bại sau 10 lần thử!";
-                    driver.Quit();
-                    return;
-                }
-
-                var button_xac_dinh_bi_ban = driver.FindElements(By.XPath("//button[starts-with(@id, 'button-')]"));
-                if (button_xac_dinh_bi_ban.Any()) 
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Tài khoản đã bị khóa!";
-                    await Task.Delay(3000);
-                    driver.Quit();
-                    Directory.CreateDirectory(folderPath);
-                    File.AppendAllText(Path.Combine(folderPath, "ban.txt"), $"{mail}|{pass}{Environment.NewLine}");
-                    return;
-                }
-
-                while (true)
-                {
-                    var buttons_tiep_tuc = driver.FindElements(By.XPath("//button[@id='action']"));
-
-                    if (buttons_tiep_tuc.Count == 0)
-                        break; 
-
-                    foreach (var button in buttons_tiep_tuc)
-                    {
+                        string username = proxy.Split(':')[2];
+                        string password = proxy.Split(':')[3];
+                        Thread.Sleep(2000);
+                        var tabs = driver.WindowHandles;
+                        driver.Close();
+                        Thread.Sleep(2000);
                         try
                         {
-                            button.Click();
-                            Thread.Sleep(5000); // Chờ một chút để trang cập nhật
+                            driver.SwitchTo().Window(tabs[0]);
                         }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Lỗi khi bấm nút: " + ex.Message);
-                        }
+                        catch { }
+                        Thread.Sleep(2000);
+                        driver.Url = "chrome-extension://ggmdpepbjljkkkdaklfihhngmmgmpggp/options.html";
+                        Thread.Sleep(3000);
+                        driver.FindElement(By.XPath("//*[@id=\"login\"]")).SendKeys(username);
+                        Thread.Sleep(1000);
+                        driver.FindElement(By.XPath("//*[@id=\"password\"]")).SendKeys(password);
+                        Thread.Sleep(1000);
+                        driver.FindElement(By.XPath("//*[@id=\"save\"]")).Click();
+                        Thread.Sleep(1000);
                     }
-                }
 
-                dataGridView1.Rows[i].Cells[3].Value = "Lấy link đổi pass";
+                    string new_password = randompasscheck.Checked ? RandomPassword(10,4) : password.Text;
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Bắt đầu";
 
-                if (mail.EndsWith("freenet.de"))
-                {
-                    Thread.Sleep(10000);
-                    string url_re_pass = doc_mail_freenet(mail, pass);
-                    driver.Navigate().GoToUrl(url_re_pass);
+                    driver.Navigate().GoToUrl("https://iforgot.apple.com/password/verify/appleid?language=vi_VN");
 
-                }
-                else if (mail.EndsWith("mail.com"))
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Loại mail.com này chưa được hỗ trợ!";
-                    driver.Quit();
-                    return;
-                }
-                else if (mail.EndsWith("gmx.com"))
-                {
-                    //Thread.Sleep(10000);
-                    //string url = doc_mail_gmx_com(driver, recoveryemail, recoverypassword);
-                    //driver.Navigate().GoToUrl(url);
-                    dataGridView1.Rows[i].Cells[3].Value = "Loại mail gmx.com này chưa được hỗ trợ!";
-                    driver.Quit();
-                    return;
-                }
-                else if (mail.EndsWith("gmx.net"))
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Loại mail gmx.net này chưa được hỗ trợ!";
-                    driver.Quit();
-                    return;
-                }
-                else
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Loại mail này chưa được hỗ trợ!";
-                    driver.Quit();
-                    return;
-                }
-
-
-
-
-
-                dataGridView1.Rows[i].Cells[3].Value = "Đặt lại pass";
-                Thread.Sleep(3000);
-
-                var passwordFields = driver.FindElements(By.XPath("//input[@type='password']"));
-                foreach (var field in passwordFields)
-                {
-                    Thread.Sleep(2000);
-                    field.SendKeys(new_password);
-                }
-
-                Thread.Sleep(3000);
-                driver.FindElement(By.XPath("//button[@id='action']")).Click();
-
-                Thread.Sleep(3000);
-                driver.FindElement(By.XPath("//button[contains(@class, 'iforgot-btn')]")).Click();
-                dataGridView1.Rows[i].Cells[3].Value = "Đổi mk thành công";
-
-                dang_nhap(driver, mail, new_password);
-                dataGridView1.Rows[i].Cells[3].Value = "Đăng nhập";
-
-                Thread.Sleep(3000); 
-                driver.SwitchTo().Frame(driver.FindElement(By.TagName("iframe")));
-                var cau_hoi_bao_mat = driver.FindElements(By.XPath("//input[@type='password' and contains(@aria-describedby, 'question-1')]"));
-                if (cau_hoi_bao_mat.Count > 0)
-                {
-                    dataGridView1.Rows[i].Cells[3].Value = "Tài khoản đã có sẵn câu hỏi bảo mật";
-                    await Task.Delay(3000);
-                    driver.Quit();
-                    Directory.CreateDirectory(folderPath);
-                    File.AppendAllText(Path.Combine(folderPath, "mail_pass.txt"), $"{mail}|{new_password}{Environment.NewLine}");
-                    return;
-                }
-
-
-
-                try
-                {
+                    Thread.Sleep(1000);
+                    driver.FindElement(By.XPath("//input[contains(@class, 'iforgot-apple-id')]")).SendKeys(mail);
                     Thread.Sleep(3000);
-                    driver.SwitchTo().Frame(0);
-                    Thread.Sleep(500);
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Giải captcha";
 
-                    var inputFields = driver.FindElements(By.XPath("//input[contains(@class, 'generic-input-field') and contains(@class, 'compact-input')]"));
+                    string apiKey = API_key.Text;
 
-                    if (inputFields.Count > 0) // Kiểm tra nếu có ít nhất một phần tử được tìm thấy
+                    int maxAttempts = 5;
+                    bool captchaSolved = false;
+
+
+                    for (int attempt = 1; attempt <= maxAttempts; attempt++)
                     {
-                        var inputField = inputFields[0]; // Lấy phần tử đầu tiên (nếu có)
-                        Thread.Sleep(500);
-                        Random rand = new Random();
+                        dataGridView1.Rows[i].Cells["Status"].Value = $"Giải captcha - Lần {attempt}";
 
-                        int ngay = rand.Next(1, 29);
-                        int thang = rand.Next(1, 13);
-                        int nam = rand.Next(1985, 2007);
+                        // Lấy ảnh CAPTCHA
+                        IWebElement imgElement = driver.FindElement(By.XPath("//img[contains(@alt, 'Thử thách bằng ảnh')]"));
+                        string imageSrc = imgElement.GetAttribute("src");
 
-                        string thang_ngay_nam = $"{thang:D2}{ngay:D2}{nam}";
-                        inputField.SendKeys(thang_ngay_nam);
+                        // Giải CAPTCHA
+                        string taskid = SolveCaptcha.Create2captchTask(apiKey, imageSrc);
+                        Thread.Sleep(5000); // Chờ API trả về kết quả
+                        string captchaCode = SolveCaptcha.Result2captchTask(apiKey, taskid);
+
+                        // Nhập CAPTCHA
+                        IWebElement captchaInput = driver.FindElement(By.XPath("//input[contains(@class, 'captcha-input')]"));
+                        captchaInput.Clear();
+                        captchaInput.SendKeys(captchaCode);
+                        dataGridView1.Rows[i].Cells["Status"].Value = captchaCode;
+
+                        Thread.Sleep(3000);
+
+                        // Bấm nút tiếp tục
+                        driver.FindElement(By.XPath("//button[contains(@class, 'nav-action') and contains(@class, 'button-primary')]")).Click();
+                        Thread.Sleep(3000);
+
+                        // Kiểm tra xem CAPTCHA có sai không
+                        try
+                        {
+                            IWebElement errorElement = driver.FindElement(By.XPath("//span[contains(@class, 'form-message')]"));
+                            if (errorElement.Displayed)
+                            {
+                                // CAPTCHA sai, cần thử lại
+                                dataGridView1.Rows[i].Cells["Status"].Value = $"CAPTCHA sai - Thử lại";
+                            }
+                        }
+                        catch (NoSuchElementException)
+                        {
+                            // Không tìm thấy thông báo lỗi => CAPTCHA đúng
+                            dataGridView1.Rows[i].Cells["Status"].Value = "CAPTCHA chính xác";
+                            captchaSolved = true; // Đặt cờ thành true
+                            break; // Thoát khỏi vòng lặp
+                        }
+
+                        if (captchaSolved) //Thoát ra khỏi vòng lặp nếu captcha đã được giải quyết.
+                        {
+                            break;
+                        }
                     }
 
-                    // Tiếp tục chạy các dòng code tiếp theo nếu không tìm thấy thẻ input
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Lỗi: " + ex.Message);
-                }
+                    // Kiểm tra nếu sau 10 lần vẫn sai
+                    if (!captchaSolved)
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Giải CAPTCHA thất bại sau 10 lần thử!";
+                        return;
+                    }
+                    Thread.Sleep(3000);
+                    var button_xac_dinh_bi_ban = driver.FindElements(By.XPath("//button[starts-with(@id, 'button-')]"));
+                    if (button_xac_dinh_bi_ban.Any())
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Tài khoản đã bị khóa!";
+                        SaveDatatoTxt($@"{folderPath}\ban.txt", $"{mail}|{pass}");
+                        return;
+                    }
+                    var input_sdt = driver.FindElements(By.XPath("//idms-textbox[@input-id=\"phoneNumber\"]"));
+                    if (input_sdt.Any())
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Tài khoản dính sdt";
+                        SaveDatatoTxt($@"{folderPath}\sdt.txt", $"{mail}|{pass}");
+                        return;
+                    }
+                    while (true)
+                    {
+                        var buttons_tiep_tuc = driver.FindElements(By.XPath("//button[@id='action']"));
 
+                        if (buttons_tiep_tuc.Count == 0)
+                            break;
 
+                        foreach (var button in buttons_tiep_tuc)
+                        {
+                            try
+                            {
+                                button.Click();
+                                Thread.Sleep(5000); // Chờ một chút để trang cập nhật
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Lỗi khi bấm nút: " + ex.Message);
+                            }
+                        }
+                    }
 
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Lấy link đổi pass";
+                    string url_re_pass = "";
+                    if (mail.EndsWith("freenet.de"))
+                    {
+                        Thread.Sleep(10000);
+                        url_re_pass = GetMail.doc_mail_freenet(mail, pass);
+                    }
+                    else if (mail.EndsWith("mail.bg"))
+                    {
+                        Thread.Sleep(10000);
+                        url_re_pass = GetMail.doc_mail_mailbg(mail, pass);
+                    }
+                    else if (mail.EndsWith("mail.com"))
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail.com này chưa được hỗ trợ!";
+                        return;
+                    }
+                    else if (mail.EndsWith("gmx.com"))
+                    {
+                        //Thread.Sleep(10000);
+                        //string url = doc_mail_gmx_com(driver, recoveryemail, recoverypassword);
+                        //driver.Navigate().GoToUrl(url);
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail gmx.com này chưa được hỗ trợ!";
+                        
+                        return;
+                    }
+                    else if (mail.EndsWith("gmx.net"))
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail gmx.net này chưa được hỗ trợ!";
+                        return;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail này chưa được hỗ trợ!";
+                        return;
+                    }
+                    if (!string.IsNullOrEmpty(url_re_pass))
+                    {
+                        driver.Navigate().GoToUrl(url_re_pass);
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Ko get được link Recover";
+                        return;
+                    }
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Đặt lại pass";
+                    Thread.Sleep(3000);
 
-                try
-                {
+                    var passwordFields = driver.FindElements(By.XPath("//input[@type='password']"));
+                    foreach (var field in passwordFields)
+                    {
+                        Thread.Sleep(2000);
+                        field.SendKeys(new_password);
+                    }
+
+                    Thread.Sleep(3000);
+                    driver.FindElement(By.XPath("//button[@id='action']")).Click();
+
+                    Thread.Sleep(3000);
+                    driver.FindElement(By.XPath("//button[contains(@class, 'iforgot-btn')]")).Click();
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Đổi mk thành công";
+
+                    dang_nhap(driver, mail, new_password);
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Đăng nhập";
+
+                    Thread.Sleep(3000);
+
+                    var iframes = driver.FindElements(By.TagName("iframe"));
+                    if (iframes.Count > 0)
+                    {
+                        driver.SwitchTo().Frame(iframes[0]); // Switch vào iframe đầu tiên
+                    }
+                    //driver.SwitchTo().Frame(0);
+
+                    //driver.SwitchTo().Frame(driver.FindElement(By.TagName("iframe")));
+                    var cau_hoi_bao_mat = driver.FindElements(By.XPath("//input[@type='password' and contains(@aria-describedby, 'question-1')]"));
+                    if (cau_hoi_bao_mat.Count > 0)
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Tài khoản đã có sẵn câu hỏi bảo mật";
+                        Thread.Sleep(3000);
+                        SaveDatatoTxt($@"{folderPath}\chbm_mail_pass.txt", $"{mail}|{new_password}");
+                        return;
+                    }
+                    Random rand = new Random();
+                    int ngay = rand.Next(1, 13);
+                    int thang = rand.Next(1, 13);
+                    int nam = rand.Next(1985, 2007);
+                    bool da_set_ngay_sinh = false;
+                    try
+                    {
+                        Thread.Sleep(3000);
+                        var inputFields = driver.FindElements(By.XPath("//input[contains(@class, 'generic-input-field') and contains(@class, 'compact-input')]"));
+
+                        if (inputFields.Count > 0) // Kiểm tra nếu có ít nhất một phần tử được tìm thấy
+                        {
+                            var inputField = inputFields[0]; // Lấy phần tử đầu tiên (nếu có)
+                            Thread.Sleep(500);
+                            string thang_ngay_nam = $"{ngay:D2}{thang:D2}{nam}";
+                            inputField.SendKeys(thang_ngay_nam);
+                            Thread.Sleep(2000);
+                            driver.FindElement(By.XPath("//button[@class='button button-primary last nav-action  pull-right weight-medium']")).Click();
+                            da_set_ngay_sinh = true;
+                        }
+
+                        // Tiếp tục chạy các dòng code tiếp theo nếu không tìm thấy thẻ input
+                    }
+                    catch (Exception ex)
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = ex.Message;
+                    }
                     string cau_tra_loi_1 = cau_trl1.Text;
                     string cau_tra_loi_2 = cau_trl2.Text;
                     string cau_tra_loi_3 = cau_trl3.Text;
-
-                    Thread.Sleep(3000);
-                    driver.SwitchTo().Frame(0);
-                    var hasOption = driver.FindElements(By.XPath("//option")).Count > 0;
-                    var hasInput = driver.FindElements(By.XPath("//input")).Count > 0;
-                    if (hasOption && hasInput)
+                    bool da_set_cau_hoi = false;
+                    try
                     {
-                        Thread.Sleep(500);
-                        Random random = new Random();
-                        //Điền câu hỏi 1
-                        int optioncauhoi = 0;
-                        var inputFields = driver.FindElements(By.XPath("//input[contains(@class, 'generic-input-field') and contains(@class, 'form-textbox')]"));
-
-                        for (int q = 0; q < 3; q++)
+                        Thread.Sleep(3000);
+                        var hasOption = driver.FindElements(By.XPath("//option")).Count > 0;
+                        var hasInput = driver.FindElements(By.XPath("//input")).Count > 0;
+                        if (hasOption && hasInput)
                         {
-                            optioncauhoi = q == 0 ? random.Next(130, 136) : q == 1 ? random.Next(136, 142) : q == 2 ? random.Next(142, 148) : 0;
-                            driver.FindElement(By.XPath($"//option[@value=\"{optioncauhoi}\"]")).Click();
-                            Thread.Sleep(1200);
-                            string cautraloi = q == 0 ? cau_tra_loi_1 : q == 1 ? cau_tra_loi_2 : q == 2 ? cau_tra_loi_3 : "";
-                            inputFields[q].Clear();
                             Thread.Sleep(500);
-                            inputFields[q].SendKeys(cautraloi);
-                            Thread.Sleep(2000);
-                            //if (i == 2)
-                            //{
-                            //    driver.FindElement(By.XPath("//button[@class=\"button button-primary last nav-action  disabled  pull-right weight-medium\"]")).Click();
-                            //}
+                            Random random = new Random();
+                            //Điền câu hỏi 1
+                            int optioncauhoi = 0;
+                            var inputFields = driver.FindElements(By.XPath("//input[contains(@class, 'generic-input-field') and contains(@class, 'form-textbox')]"));
+
+                            for (int q = 0; q < 3; q++)
+                            {
+                                optioncauhoi = q == 0 ? random.Next(130, 136) : q == 1 ? random.Next(136, 142) : q == 2 ? random.Next(142, 148) : 0;
+                                driver.FindElement(By.XPath($"//option[@value=\"{optioncauhoi}\"]")).Click();
+                                Thread.Sleep(1200);
+                                string cautraloi = q == 0 ? cau_tra_loi_1 : q == 1 ? cau_tra_loi_2 : q == 2 ? cau_tra_loi_3 : "";
+                                inputFields[q].Clear();
+                                Thread.Sleep(500);
+                                inputFields[q].SendKeys(cautraloi);
+                                Thread.Sleep(2000);
+                                if (q == 2)
+                                {
+                                    driver.FindElement(By.XPath("//button[contains(@class, 'button-primary')]")).Click();
+                                    da_set_cau_hoi = true;
+                                }
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = ex.Message;
+                    }
 
+                    dataGridView1.Rows[i].Cells["Status"].Value = "Recover success";
+                    string ngaythangnamluu = da_set_ngay_sinh ? $"{ngay:D2}/{thang:D2}/{nam}" : "";
+                    string cauhoiluu = da_set_cau_hoi ? $"{cau_tra_loi_1}|{cau_tra_loi_2}|{cau_tra_loi_3}" : "";
+                    SaveDatatoTxt($@"{folderPath}\Recover_Sucess.txt", $"{mail}|{pass} -> {mail}|{new_password}|{ngaythangnamluu}|{cauhoiluu}");
+                    return;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Lỗi xảy ra: " + ex.Message);
+                    dataGridView1.Rows[i].Cells["Status"].Value = ex.Message;
                 }
-
-
-
-                //driver.Quit();
-
-                dataGridView1.Rows[i].Cells[3].Value = "Xong";
-                Interlocked.Decrement(ref so_luong_da_chay);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi: " + ex.Message);
-            }
+                finally
+                {
+                    if (!kotatchrome.Checked)
+                    {
+                        driver.Quit();
+                    }
+                    soluongdangchay--;
+                }
+            });
+            thread.Start();
         }
-
 
         private void dang_nhap(IWebDriver driver, string mail, string new_password)
         {
@@ -423,56 +613,56 @@ namespace ToolsRestartPassApple
 
 
 
-        private string doc_mail_freenet(string mail, string password)
-        {
-            try
-            {
-                using (var client = new ImapClient())
-                {
-                    // Kết nối đến IMAP Server của Freenet
-                    client.Connect("mx.freenet.de", 993, SecureSocketOptions.SslOnConnect);
+        //private string doc_mail_freenet(string mail, string password)
+        //{
+        //    try
+        //    {
+        //        using (var client = new ImapClient())
+        //        {
+        //            // Kết nối đến IMAP Server của Freenet
+        //            client.Connect("mx.freenet.de", 993, SecureSocketOptions.SslOnConnect);
 
-                    // Đăng nhập vào tài khoản
-                    client.Authenticate(mail, password);
+        //            // Đăng nhập vào tài khoản
+        //            client.Authenticate(mail, password);
 
-                    // Mở hộp thư Inbox
-                    var inbox = client.Inbox;
-                    inbox.Open(FolderAccess.ReadOnly);
+        //            // Mở hộp thư Inbox
+        //            var inbox = client.Inbox;
+        //            inbox.Open(FolderAccess.ReadOnly);
 
-                    // Duyệt từ email mới nhất về trước, tìm email đầu tiên từ Apple
-                    for (int i = inbox.Count - 1; i >= 0; i--)
-                    {
-                        var message = inbox.GetMessage(i);
-                        if (message.From.ToString().Contains("Apple")) // Chỉ lấy email gần nhất từ Apple
-                        {
-                            string emailBody = message.TextBody;
+        //            // Duyệt từ email mới nhất về trước, tìm email đầu tiên từ Apple
+        //            for (int i = inbox.Count - 1; i >= 0; i--)
+        //            {
+        //                var message = inbox.GetMessage(i);
+        //                if (message.From.ToString().Contains("Apple")) // Chỉ lấy email gần nhất từ Apple
+        //                {
+        //                    string emailBody = message.TextBody;
 
-                            // Regex tìm URL đầu tiên
-                            string urlPattern = @"(https://iforgot\.apple\.com/verify/email\?key=[^\s]+)";
-                            Match match = Regex.Match(emailBody, urlPattern);
+        //                    // Regex tìm URL đầu tiên
+        //                    string urlPattern = @"(https://iforgot\.apple\.com/verify/email\?key=[^\s]+)";
+        //                    Match match = Regex.Match(emailBody, urlPattern);
 
-                            if (match.Success)
-                            {
-                                client.Disconnect(true);
-                                string Url = match.Value;
-                                return Url; 
-                            }
+        //                    if (match.Success)
+        //                    {
+        //                        client.Disconnect(true);
+        //                        string Url = match.Value;
+        //                        return Url; 
+        //                    }
 
-                            break; 
-                        }
-                    }
+        //                    break; 
+        //                }
+        //            }
 
-                    client.Disconnect(true);
+        //            client.Disconnect(true);
 
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi: {ex.Message}");
-            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Lỗi: {ex.Message}");
+        //    }
 
-            return null; 
-        }
+        //    return null; 
+        //}
 
 
         private string doc_mail_gmx_com(IWebDriver driver, string recoveryemail, string recoverypassword)
@@ -862,9 +1052,6 @@ namespace ToolsRestartPassApple
             MessageBox.Show($"Nhập thành công {dataGridView1.Rows.Count} Mail", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
-        
-
         private void add_proxy_clipboard(object sender, EventArgs e)
         {
             try
@@ -888,7 +1075,7 @@ namespace ToolsRestartPassApple
                 {
                     proxyList.Add(line.Trim()); // Thêm proxy vào danh sách
                 }
-
+                tongproxy.Text = proxyList.Count.ToString();
                 MessageBox.Show($"Thêm thành công {proxyList.Count} proxy từ Clipboard!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -919,7 +1106,7 @@ namespace ToolsRestartPassApple
                     {
                         proxyList.Add(line.Trim());
                     }
-
+                    tongproxy.Text = proxyList.Count.ToString();
                     MessageBox.Show($"Đọc thành công {proxyList.Count} proxy từ file!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -929,6 +1116,154 @@ namespace ToolsRestartPassApple
             }
         }
 
+        private void Tong_so_mail_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            int x = 0;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value) == true)
+                {
+                    x++;
+                }
+            }
+            dachon.Text = x.ToString();
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                List<string> list = new List<string>();
+                list.Clear();
+                for (int j = 0; j < dataGridView1.RowCount; j++)
+                {
+                    if (Convert.ToBoolean(dataGridView1.Rows[j].Cells[0].Value))
+                    {
+
+                        list.Add(dataGridView1.Rows[j].Cells[0].Value.ToString());
+                    }
+                }
+                dachon.Text = list.Count.ToString();
+                Tong_so_mail.Text = dataGridView1.RowCount.ToString();
+            }
+            catch { }
+        }
+
+        private void chọnTấtCảToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int r = 0; r < dataGridView1.RowCount; r++)
+                {
+                    dataGridView1.Rows[r].Cells[0].Value = true;
+                }
+                dachon.Text = dataGridView1.RowCount.ToString();
+            }
+            catch { }
+        }
+        private void UpdateSelectedCount()
+        {
+            int selectedCount = 0;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[0].Value) == true)
+                {
+                    selectedCount++;
+                }
+            }
+
+            dachon.Text = selectedCount.ToString();
+        }
+
+        private void chọnBôiĐenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                row.Cells[0].Value = true;
+            }
+            UpdateSelectedCount();
+        }
+
+        private void bỏChọnTấtCảToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int r = 0; r < dataGridView1.RowCount; r++)
+                {
+                    dataGridView1.Rows[r].Cells[0].Value = null;
+                }
+                dachon.Text = 0.ToString();
+            }
+            catch { }
+        }
+
+        private void xóaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value))
+                {
+                    list.Add(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                }
+            }
+            if (list.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản cần xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                try
+                {
+                    for (int j = 0; j < dataGridView1.RowCount; j++)
+                    {
+                        if (Convert.ToBoolean(dataGridView1.Rows[j].Cells[0].Value))
+                        {
+                            dataGridView1.Rows.RemoveAt(j--);
+                        }
+                    }
+                }
+                catch { }
+            }
+            Tong_so_mail.Text = dataGridView1.RowCount.ToString();
+        }
+
+        private void randompasscheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (randompasscheck.Checked)
+            {
+                password.Enabled = false;
+            }
+            else
+            {
+                password.Enabled = true;
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(Directory.GetCurrentDirectory() + "\\output");
+            }
+            catch
+            {
+                MessageBox.Show("Không thể mở folder save , vui lòng check lại !", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void bnt_stop_Click(object sender, EventArgs e)
+        {
+            StopThread = true;
+        }
     }
 }

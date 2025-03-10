@@ -55,9 +55,9 @@ namespace ToolsRestartPassApple
                 request.UserAgent = Http.ChromeUserAgent();
 
                 string body = $@"{{
-                ""clientKey"": ""{api_key}"",
-                ""taskId"": ""{taskid}""
-            }}";
+                    ""clientKey"": ""{api_key}"",
+                    ""taskId"": ""{taskid}""
+                }}";
 
                 for (int i = 0; i < 5; i++)
                 {
