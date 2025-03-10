@@ -1,0 +1,366 @@
+==== Email 1 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Cách đặt lại mật khẩu cho Tài khoản Apple của bạn
+📜 Nội dung:
+Xin chào Angermann Dennis,
+	
+Gần đây bạn đã yêu cầu đặt lại mật khẩu cho Tài khoản Apple của bạn. Hãy vào liên kết dưới đây để hoàn tất quá trình này.
+
+Đặt lại ngay
+https://iforgot.apple.com/verify/email?key=001670-00-198465d260ccf200ecfa93a6c96a2a28eea271e026100db76b2a790faff87a4dLTOW&language=VN-VI
+
+Nếu bạn không thực hiện thay đổi này hoặc tin rằng có người đã truy cập trái phép vào tài khoản, hãy truy cập iforgot.apple.com để đặt lại mật khẩu ngay lập tức. Sau đó, đăng nhập vào trang Tài khoản Apple tại https://account.apple.com để xem lại và cập nhật cài đặt bảo mật của bạn.
+
+iForgot
+https://iforgot.apple.com 
+
+Tài khoản Apple 
+https://account.apple.com 
+
+Trân trọng,
+
+Hỗ trợ của Apple
+
+-----------------------------------
+
+Tài khoản Apple
+https://account.apple.com
+
+Hỗ trợ
+https://www.apple.com/support
+
+Chính sách quyền riêng tư
+https://www.apple.com/legal/privacy
+
+Bản quyền © 2025 One Apple Park Way, Cupertino, CA 95014, United States Giữ toàn quyền.
+
+----------------------------------------
+
+==== Email 2 ====
+📩 Người gửi: "noreply@apple.com" <noreply@email.apple.com>
+📌 Chủ đề: Deine Apple Account-Anfrage
+📜 Nội dung:
+Deine Apple Account-Anfrage
+
+Hallo WP/StB Dr. Mark,
+
+wir haben deine Anfrage geprüft und der Zugriff auf deinen Account (stb-weirich@freenet.de) wurde verweigert.
+
+
+Mit freundlichen Grüßen
+Apple
+
+-------------------------------------------------------------
+Apple Account
+https://account.apple.com
+
+Support
+https://getsupport.apple.com
+
+Datenschutzrichtlinien
+https://www.apple.com/legal/privacy/
+
+Copyright © 2025 Apple Distribution International, Hollyhill Industrial Estate, Hollyhill, Cork, Ireland. Alle Rechte vorbehalten.
+
+----------------------------------------
+
+==== Email 3 ====
+📩 Người gửi: "noreply@apple.com" <noreply@email.apple.com>
+📌 Chủ đề: Deine Apple Account-Anfrage
+📜 Nội dung:
+Deine Apple Account-Anfrage
+
+Hallo Steffi,
+
+wir haben deine Anfrage geprüft und der Zugriff auf deinen Account (steffi.ringelhann@freenet.de) wurde verweigert.
+
+
+Mit freundlichen Grüßen
+Apple
+
+-------------------------------------------------------------
+Apple Account
+https://account.apple.com
+
+Support
+https://getsupport.apple.com
+
+Datenschutzrichtlinien
+https://www.apple.com/legal/privacy/
+
+Copyright © 2025 Apple Distribution International, Hollyhill Industrial Estate, Hollyhill, Cork, Ireland. Alle Rechte vorbehalten.
+
+----------------------------------------
+
+==== Email 4 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Dein Apple Account‑Passwort wurde zurückgesetzt
+📜 Nội dung:
+Hallo Dennis Angermann,
+	
+das Passwort für deinen Apple Account (gullyan@freenet.de) wurde erfolgreich zurückgesetzt.
+
+Wenn du diese Änderung nicht vorgenommen hast oder der Meinung bist, dass eine unbefugte Person auf deinen Account zugegriffen hat, setze unter iforgot.apple.com sofort dein Passwort zurück. Melde dich anschließend auf der Apple Account-Seite unter https://account.apple.com an, um deine Sicherheitseinstellungen zu überprüfen und zu aktualisieren.
+
+iForgot
+https://iforgot.apple.com
+
+Apple Account
+https://account.apple.com
+
+Wenn du zusätzliche Hilfe benötigst, wende dich an den Apple Support.
+
+Apple Support
+https://www.apple.com/support
+
+Mit freundlichen Grüßen
+
+Apple Support
+
+-----------------------------------
+
+Apple Account
+https://account.apple.com
+
+Support
+https://www.apple.com/support
+
+Datenschutzrichtlinien
+https://www.apple.com/legal/privacy
+
+Copyright © 2025 One Apple Park Way, Cupertino, CA 95014, United States Alle Rechte vorbehalten.
+
+----------------------------------------
+
+==== Email 5 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Cách đặt lại mật khẩu cho Tài khoản Apple của bạn
+📜 Nội dung:
+Xin chào Angermann Dennis,
+	
+Gần đây bạn đã yêu cầu đặt lại mật khẩu cho Tài khoản Apple của bạn. Hãy vào liên kết dưới đây để hoàn tất quá trình này.
+
+Đặt lại ngay
+https://iforgot.apple.com/verify/email?key=001670-00-9bbcff84eb059a409303d65c1a8d2502263709a56be9f7dc930d8319b25d6a13LTOW&language=VN-VI
+
+Nếu bạn không thực hiện thay đổi này hoặc tin rằng có người đã truy cập trái phép vào tài khoản, hãy truy cập iforgot.apple.com để đặt lại mật khẩu ngay lập tức. Sau đó, đăng nhập vào trang Tài khoản Apple tại https://account.apple.com để xem lại và cập nhật cài đặt bảo mật của bạn.
+
+iForgot
+https://iforgot.apple.com 
+
+Tài khoản Apple 
+https://account.apple.com 
+
+Trân trọng,
+
+Hỗ trợ của Apple
+
+-----------------------------------
+
+Tài khoản Apple
+https://account.apple.com
+
+Hỗ trợ
+https://www.apple.com/support
+
+Chính sách quyền riêng tư
+https://www.apple.com/legal/privacy
+
+Bản quyền © 2025 One Apple Park Way, Cupertino, CA 95014, United States Giữ toàn quyền.
+
+----------------------------------------
+
+==== Email 6 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Cách đặt lại mật khẩu cho Tài khoản Apple của bạn
+📜 Nội dung:
+Xin chào Angermann Dennis,
+	
+Gần đây bạn đã yêu cầu đặt lại mật khẩu cho Tài khoản Apple của bạn. Hãy vào liên kết dưới đây để hoàn tất quá trình này.
+
+Đặt lại ngay
+https://iforgot.apple.com/verify/email?key=001670-00-45d8f696c1b5eacb875f388ce35bf5ef913e3814f721dfc3119a28bb22665f49LTOW&language=VN-VI
+
+Nếu bạn không thực hiện thay đổi này hoặc tin rằng có người đã truy cập trái phép vào tài khoản, hãy truy cập iforgot.apple.com để đặt lại mật khẩu ngay lập tức. Sau đó, đăng nhập vào trang Tài khoản Apple tại https://account.apple.com để xem lại và cập nhật cài đặt bảo mật của bạn.
+
+iForgot
+https://iforgot.apple.com 
+
+Tài khoản Apple 
+https://account.apple.com 
+
+Trân trọng,
+
+Hỗ trợ của Apple
+
+-----------------------------------
+
+Tài khoản Apple
+https://account.apple.com
+
+Hỗ trợ
+https://www.apple.com/support
+
+Chính sách quyền riêng tư
+https://www.apple.com/legal/privacy
+
+Bản quyền © 2025 One Apple Park Way, Cupertino, CA 95014, United States Giữ toàn quyền.
+
+----------------------------------------
+
+==== Email 7 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Cách đặt lại mật khẩu cho Tài khoản Apple của bạn
+📜 Nội dung:
+Xin chào Angermann Dennis,
+	
+Gần đây bạn đã yêu cầu đặt lại mật khẩu cho Tài khoản Apple của bạn. Hãy vào liên kết dưới đây để hoàn tất quá trình này.
+
+Đặt lại ngay
+https://iforgot.apple.com/verify/email?key=001670-00-5253c94dba31314be70e059a684b202b53e40e6321e11e9c444d4b015b2e1221LTOW&language=VN-VI
+
+Nếu bạn không thực hiện thay đổi này hoặc tin rằng có người đã truy cập trái phép vào tài khoản, hãy truy cập iforgot.apple.com để đặt lại mật khẩu ngay lập tức. Sau đó, đăng nhập vào trang Tài khoản Apple tại https://account.apple.com để xem lại và cập nhật cài đặt bảo mật của bạn.
+
+iForgot
+https://iforgot.apple.com 
+
+Tài khoản Apple 
+https://account.apple.com 
+
+Trân trọng,
+
+Hỗ trợ của Apple
+
+-----------------------------------
+
+Tài khoản Apple
+https://account.apple.com
+
+Hỗ trợ
+https://www.apple.com/support
+
+Chính sách quyền riêng tư
+https://www.apple.com/legal/privacy
+
+Bản quyền © 2025 One Apple Park Way, Cupertino, CA 95014, United States Giữ toàn quyền.
+
+----------------------------------------
+
+==== Email 8 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Dein Apple Account‑Passwort wurde zurückgesetzt
+📜 Nội dung:
+Hallo Dennis Angermann,
+	
+das Passwort für deinen Apple Account (gullyan@freenet.de) wurde erfolgreich zurückgesetzt.
+
+Wenn du diese Änderung nicht vorgenommen hast oder der Meinung bist, dass eine unbefugte Person auf deinen Account zugegriffen hat, setze unter iforgot.apple.com sofort dein Passwort zurück. Melde dich anschließend auf der Apple Account-Seite unter https://account.apple.com an, um deine Sicherheitseinstellungen zu überprüfen und zu aktualisieren.
+
+iForgot
+https://iforgot.apple.com
+
+Apple Account
+https://account.apple.com
+
+Wenn du zusätzliche Hilfe benötigst, wende dich an den Apple Support.
+
+Apple Support
+https://www.apple.com/support
+
+Mit freundlichen Grüßen
+
+Apple Support
+
+-----------------------------------
+
+Apple Account
+https://account.apple.com
+
+Support
+https://www.apple.com/support
+
+Datenschutzrichtlinien
+https://www.apple.com/legal/privacy
+
+Copyright © 2025 One Apple Park Way, Cupertino, CA 95014, United States Alle Rechte vorbehalten.
+
+----------------------------------------
+
+==== Email 9 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Cách đặt lại mật khẩu cho Tài khoản Apple của bạn
+📜 Nội dung:
+Xin chào Angermann Dennis,
+	
+Gần đây bạn đã yêu cầu đặt lại mật khẩu cho Tài khoản Apple của bạn. Hãy vào liên kết dưới đây để hoàn tất quá trình này.
+
+Đặt lại ngay
+https://iforgot.apple.com/verify/email?key=001670-00-8a3a1206a845fc4bbf041733ce47f4a9b71cd543e698ce7c435da043c2c90c61LTOW&language=VN-VI
+
+Nếu bạn không thực hiện thay đổi này hoặc tin rằng có người đã truy cập trái phép vào tài khoản, hãy truy cập iforgot.apple.com để đặt lại mật khẩu ngay lập tức. Sau đó, đăng nhập vào trang Tài khoản Apple tại https://account.apple.com để xem lại và cập nhật cài đặt bảo mật của bạn.
+
+iForgot
+https://iforgot.apple.com 
+
+Tài khoản Apple 
+https://account.apple.com 
+
+Trân trọng,
+
+Hỗ trợ của Apple
+
+-----------------------------------
+
+Tài khoản Apple
+https://account.apple.com
+
+Hỗ trợ
+https://www.apple.com/support
+
+Chính sách quyền riêng tư
+https://www.apple.com/legal/privacy
+
+Bản quyền © 2025 One Apple Park Way, Cupertino, CA 95014, United States Giữ toàn quyền.
+
+----------------------------------------
+
+==== Email 10 ====
+📩 Người gửi: "Apple" <appleid@id.apple.com>
+📌 Chủ đề: Dein Apple Account‑Passwort wurde zurückgesetzt
+📜 Nội dung:
+Hallo Dennis Angermann,
+	
+das Passwort für deinen Apple Account (gullyan@freenet.de) wurde erfolgreich zurückgesetzt.
+
+Wenn du diese Änderung nicht vorgenommen hast oder der Meinung bist, dass eine unbefugte Person auf deinen Account zugegriffen hat, setze unter iforgot.apple.com sofort dein Passwort zurück. Melde dich anschließend auf der Apple Account-Seite unter https://account.apple.com an, um deine Sicherheitseinstellungen zu überprüfen und zu aktualisieren.
+
+iForgot
+https://iforgot.apple.com
+
+Apple Account
+https://account.apple.com
+
+Wenn du zusätzliche Hilfe benötigst, wende dich an den Apple Support.
+
+Apple Support
+https://www.apple.com/support
+
+Mit freundlichen Grüßen
+
+Apple Support
+
+-----------------------------------
+
+Apple Account
+https://account.apple.com
+
+Support
+https://www.apple.com/support
+
+Datenschutzrichtlinien
+https://www.apple.com/legal/privacy
+
+Copyright © 2025 One Apple Park Way, Cupertino, CA 95014, United States Alle Rechte vorbehalten.
+
+----------------------------------------
+
