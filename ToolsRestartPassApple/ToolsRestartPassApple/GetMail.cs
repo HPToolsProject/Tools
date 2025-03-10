@@ -33,7 +33,7 @@ namespace ToolsRestartPassApple
                         for (int i = inbox.Count - 1; i >= 0; i--)
                         {
                             var message = inbox.GetMessage(i);
-                            if (message.From.ToString().Contains("Apple"))
+                            if (message.From.ToString().Contains("Apple") && message.To.ToString().ToLower().Contains(mail.ToLower()))
                             {
                                 string emailBody = message.TextBody;
 
@@ -84,7 +84,7 @@ namespace ToolsRestartPassApple
                     for (int i = messageCount; i >= 1; i--)
                     {
                         var message = client.GetMessage(i);
-                        if (message.From.ToString().Contains("Apple"))
+                        if (message.From.ToString().Contains("Apple") && message.To.ToString().ToLower().Contains(mail.ToLower()))
                         {
                             string emailBody = message.TextBody;
 
@@ -132,7 +132,7 @@ namespace ToolsRestartPassApple
                         for (int i = inbox.Count - 1; i >= 0; i--)
                         {
                             var message = inbox.GetMessage(i);
-                            if (message.From.ToString().Contains("Apple"))
+                            if (message.From.ToString().Contains("Apple") && message.To.ToString().ToLower().Contains(mail.ToLower()))
                             {
                                 string emailBody = message.TextBody;
 
@@ -183,7 +183,7 @@ namespace ToolsRestartPassApple
                     for (int i = messageCount; i >= 1; i--)
                     {
                         var message = client.GetMessage(i);
-                        if (message.From.ToString().Contains("Apple"))
+                        if (message.From.ToString().Contains("Apple") && message.To.ToString().ToLower().Contains(mail.ToLower()))
                         {
                             string emailBody = message.TextBody;
 

@@ -34,6 +34,7 @@ using System.Drawing.Printing;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using OpenQA.Selenium.DevTools.V131.Debugger;
 
 
 
@@ -147,7 +148,7 @@ namespace ToolsRestartPassApple
                         }
                         HamChay(i, dataGridView1.Rows[i].Cells["Mail"].Value.ToString(), dataGridView1.Rows[i].Cells["Pass"].Value.ToString(), Output);
                         soluongdangchay++;
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                     }
                 }
                 while (!StopThread)
@@ -387,6 +388,8 @@ namespace ToolsRestartPassApple
                         SaveDatatoTxt($@"{folderPath}\sdt.txt", $"{mail}|{pass}");
                         return;
                     }
+                    //driver.FindElement(By.XPath("//button[@id='action'][1]")).Click();
+                    int daan = 0;
                     while (true)
                     {
                         var buttons_tiep_tuc = driver.FindElements(By.XPath("//button[@id='action']"));
@@ -405,6 +408,31 @@ namespace ToolsRestartPassApple
                             {
                                 Console.WriteLine("Lỗi khi bấm nút: " + ex.Message);
                             }
+                            daan++;
+                        }
+                        if (daan > 4)
+                        {
+                            break;
+                        }
+                    }
+
+                    Thread.Sleep(2000);
+                    for (int x = 0; x < 10; x++)
+                    {
+                        var OKDONE = driver.FindElements(By.XPath("//i[@class=\"icon icon_green_check success xl desktop\"]"));
+
+                        if (OKDONE.Count == 0)
+                        {
+                            if (x >= 8)
+                            {
+                                dataGridView1.Rows[i].Cells["Status"].Value = "Không gửi được code";
+                                return;
+                            }
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
 
@@ -454,7 +482,14 @@ namespace ToolsRestartPassApple
                         return;
                     }
                     dataGridView1.Rows[i].Cells["Status"].Value = "Đặt lại pass";
-                    Thread.Sleep(3000);
+                    Thread.Sleep(4000);
+
+                    var nut_forgot = driver.FindElements(By.XPath("//button[@class='button-caption-link forgot-pwd']"));
+                    if (nut_forgot.Count > 0)
+                    {
+                        nut_forgot[0].Click();
+                    }
+                    Thread.Sleep(5000);
 
                     var passwordFields = driver.FindElements(By.XPath("//input[@type='password']"));
                     foreach (var field in passwordFields)
@@ -466,14 +501,20 @@ namespace ToolsRestartPassApple
                     Thread.Sleep(3000);
                     driver.FindElement(By.XPath("//button[@id='action']")).Click();
 
-                    Thread.Sleep(3000);
-                    driver.FindElement(By.XPath("//button[contains(@class, 'iforgot-btn')]")).Click();
+                    Thread.Sleep(6000);
+                    try
+                    {
+                        driver.FindElement(By.XPath("//button[contains(@class, 'iforgot-btn')]")).Click();
+
+                    }
+                    catch { }
+
                     dataGridView1.Rows[i].Cells["Status"].Value = "Đổi mk thành công";
 
                     dang_nhap(driver, mail, new_password);
                     dataGridView1.Rows[i].Cells["Status"].Value = "Đăng nhập";
 
-                    Thread.Sleep(3000);
+                    Thread.Sleep(6000);
 
                     var iframes = driver.FindElements(By.TagName("iframe"));
                     if (iframes.Count > 0)
@@ -570,6 +611,7 @@ namespace ToolsRestartPassApple
                 }
                 finally
                 {
+                    dataGridView1.Rows[i].Cells[0].Value = false;
                     if (!kotatchrome.Checked)
                     {
                         driver.Quit();
