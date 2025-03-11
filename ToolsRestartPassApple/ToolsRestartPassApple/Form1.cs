@@ -551,6 +551,7 @@ namespace ToolsRestartPassApple
                             Thread.Sleep(2000);
                             driver.FindElement(By.XPath("//button[@class='button button-primary last nav-action  pull-right weight-medium']")).Click();
                             da_set_ngay_sinh = true;
+                            Thread.Sleep(8000);
                         }
 
                         // Tiếp tục chạy các dòng code tiếp theo nếu không tìm thấy thẻ input
