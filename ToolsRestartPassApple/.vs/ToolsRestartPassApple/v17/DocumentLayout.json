@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\",
+  "WorkspaceRootPath": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|e:\\source\\code moi\\tools\\toolsrestartpassapple\\toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|solutionrelative:toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\toolsrestartpassapple\\solvecaptcha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|solutionrelative:toolsrestartpassapple\\solvecaptcha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|c:\\c#\\recoverappleaccount\\tools\\toolsrestartpassapple\\toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|e:\\source\\code moi\\tools\\toolsrestartpassapple\\toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|solutionrelative:toolsrestartpassapple\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|c:\\c#\\recoverappleaccount\\tools\\toolsrestartpassapple\\toolsrestartpassapple\\getmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\toolsrestartpassapple\\solvecaptcha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|solutionrelative:toolsrestartpassapple\\solvecaptcha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\toolsrestartpassapple\\getmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9825E153-222F-4568-A17D-10E48BD18BCD}|ToolsRestartPassApple\\ToolsRestartPassApple.csproj|solutionrelative:toolsrestartpassapple\\getmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -29,19 +29,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 289,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{ba58fdf3-7af7-4b60-b69b-40ac68d83b75}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetMail.cs",
+              "DocumentMoniker": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\GetMail.cs",
+              "RelativeDocumentMoniker": "ToolsRestartPassApple\\GetMail.cs",
+              "ToolTip": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\GetMail.cs",
+              "RelativeToolTip": "ToolsRestartPassApple\\GetMail.cs",
+              "ViewState": "AgIAALMAAAAAAAAAAAAwwLoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T08:36:04.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
+              "RelativeDocumentMoniker": "ToolsRestartPassApple\\Form1.cs",
+              "ToolTip": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
+              "RelativeToolTip": "ToolsRestartPassApple\\Form1.cs",
+              "ViewState": "AgIAAI8CAAAAAAAAAAAQwIUCAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T21:16:11.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SolveCaptcha.cs",
+              "DocumentMoniker": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\SolveCaptcha.cs",
+              "RelativeDocumentMoniker": "ToolsRestartPassApple\\SolveCaptcha.cs",
+              "ToolTip": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\SolveCaptcha.cs",
+              "RelativeToolTip": "ToolsRestartPassApple\\SolveCaptcha.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAcwDYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T02:53:44.572Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 111,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
+              "RelativeDocumentMoniker": "ToolsRestartPassApple\\Form1.cs",
+              "ToolTip": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs [Design]",
+              "RelativeToolTip": "ToolsRestartPassApple\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T21:16:06.022Z",
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Bookmark",
@@ -49,71 +101,14 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GetMail.cs",
-              "DocumentMoniker": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\GetMail.cs",
-              "RelativeDocumentMoniker": "ToolsRestartPassApple\\GetMail.cs",
-              "ToolTip": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\GetMail.cs",
-              "RelativeToolTip": "ToolsRestartPassApple\\GetMail.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAAAwwLoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T08:36:04.293Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
-              "RelativeDocumentMoniker": "ToolsRestartPassApple\\Form1.cs",
-              "ToolTip": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
-              "RelativeToolTip": "ToolsRestartPassApple\\Form1.cs",
-              "ViewState": "AgIAAN8BAAAAAAAAAAAEwOYBAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T21:16:11.701Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SolveCaptcha.cs",
-              "DocumentMoniker": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\SolveCaptcha.cs",
-              "RelativeDocumentMoniker": "ToolsRestartPassApple\\SolveCaptcha.cs",
-              "ToolTip": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\SolveCaptcha.cs",
-              "RelativeToolTip": "ToolsRestartPassApple\\SolveCaptcha.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAcwDYAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T02:53:44.572Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 111,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
               "Title": "ToolsRestartPassApple",
-              "DocumentMoniker": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
+              "DocumentMoniker": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
               "RelativeDocumentMoniker": "ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
-              "ToolTip": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
+              "ToolTip": "E:\\source\\code moi\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
               "RelativeToolTip": "ToolsRestartPassApple\\ToolsRestartPassApple.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-03-10T03:09:39.235Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs",
-              "RelativeDocumentMoniker": "ToolsRestartPassApple\\Form1.cs",
-              "ToolTip": "C:\\C#\\RecoverAppleAccount\\Tools\\ToolsRestartPassApple\\ToolsRestartPassApple\\Form1.cs [Design]",
-              "RelativeToolTip": "ToolsRestartPassApple\\Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T21:16:06.022Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }

@@ -578,7 +578,8 @@ namespace ToolsRestartPassApple
 
                             for (int q = 0; q < 3; q++)
                             {
-                                optioncauhoi = q == 0 ? random.Next(130, 136) : q == 1 ? random.Next(136, 142) : q == 2 ? random.Next(142, 148) : 0;
+                                //optioncauhoi = q == 0 ? random.Next(130, 136) : q == 1 ? random.Next(136, 142) : q == 2 ? random.Next(142, 148) : 0;
+                                optioncauhoi = q == 0 ? 130 : q == 1 ? 136 : q == 2 ? 142 : 0;
                                 driver.FindElement(By.XPath($"//option[@value=\"{optioncauhoi}\"]")).Click();
                                 Thread.Sleep(1200);
                                 string cautraloi = q == 0 ? cau_tra_loi_1 : q == 1 ? cau_tra_loi_2 : q == 2 ? cau_tra_loi_3 : "";
@@ -588,8 +589,10 @@ namespace ToolsRestartPassApple
                                 Thread.Sleep(2000);
                                 if (q == 2)
                                 {
+                                    Thread.Sleep(1000);
                                     driver.FindElement(By.XPath("//button[contains(@class, 'button-primary')]")).Click();
                                     da_set_cau_hoi = true;
+                                    Thread.Sleep(8000);
                                 }
                             }
                         }
@@ -625,15 +628,15 @@ namespace ToolsRestartPassApple
         private void dang_nhap(IWebDriver driver, string mail, string new_password)
         {
             driver.Navigate().GoToUrl("https://account.apple.com/sign-in");
-            Thread.Sleep(5000);
+            Thread.Sleep(8000);
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-            // 🔹 Chờ và chuyển vào iframe
+
             wait.Until(d => d.FindElement(By.Id("aid-auth-widget-iFrame")));
             driver.SwitchTo().Frame("aid-auth-widget-iFrame");
 
-            // 🔹 Nhập email và nhấn "Continue"
+
             IWebElement accountInput = wait.Until(d => d.FindElement(By.Id("account_name_text_field")));
             accountInput.SendKeys(mail);
             Thread.Sleep(1000);
@@ -642,12 +645,12 @@ namespace ToolsRestartPassApple
             continueButton.Click();
             Thread.Sleep(7000);  // Chờ trang tải
 
-            // 🔹 Chờ ô nhập mật khẩu xuất hiện
+
             IWebElement passwordInput = wait.Until(d => d.FindElement(By.Id("password_text_field")));
             passwordInput.SendKeys(new_password);
             Thread.Sleep(1000);
 
-            // 🔹 Chờ lại nút "Continue" rồi click lần 2
+
             continueButton = wait.Until(d => d.FindElement(By.Id("sign-in")));
             continueButton.Click();
 
