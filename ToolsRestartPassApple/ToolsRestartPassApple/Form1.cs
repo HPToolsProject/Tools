@@ -35,6 +35,7 @@ using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using OpenQA.Selenium.DevTools.V131.Debugger;
+using static System.Windows.Forms.LinkLabel;
 
 
 
@@ -58,6 +59,7 @@ namespace ToolsRestartPassApple
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            comboBox_loaimail.SelectedIndex = 0;
             try
             {
                 string data = File.ReadAllText("config.txt");
@@ -81,6 +83,7 @@ namespace ToolsRestartPassApple
         private List<string> listmailcheck = new List<string>();
         public string Output = "";
         private int soluongdangchay = 0;
+        
 
         private void fmain_FormClosing(Object sender, FormClosingEventArgs e)
         {
@@ -438,40 +441,49 @@ namespace ToolsRestartPassApple
 
                     dataGridView1.Rows[i].Cells["Status"].Value = "Lấy link đổi pass";
                     string url_re_pass = "";
-                    if (mail.EndsWith("freenet.de"))
+
+
+                 
+                    // Lấy giá trị SelectedIndex từ UI Thread trước khi vào luồng khác
+                    int selectedIndex = -1;
+                    this.Invoke(new Action(() => { selectedIndex = comboBox_loaimail.SelectedIndex; }));
+
+                    // Dùng selectedIndex bình thường trong Thread khác
+                    if (selectedIndex == 0)
                     {
                         Thread.Sleep(10000);
                         url_re_pass = GetMail.doc_mail_freenet(mail, pass);
                     }
-                    else if (mail.EndsWith("mail.bg"))
+                    else if (selectedIndex == 1)
                     {
                         Thread.Sleep(10000);
                         url_re_pass = GetMail.doc_mail_mailbg(mail, pass);
                     }
-                    else if (mail.EndsWith("mail.com"))
+                    else if (selectedIndex == 2)
                     {
-                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail.com này chưa được hỗ trợ!";
-                        return;
+                        Thread.Sleep(10000);
+                        url_re_pass = GetMail.doc_mail_cham_com(driver, mail, pass);
                     }
-                    else if (mail.EndsWith("gmx.com"))
+                    else if (selectedIndex == 3)
                     {
-                        //Thread.Sleep(10000);
-                        //string url = doc_mail_gmx_com(driver, recoveryemail, recoverypassword);
-                        //driver.Navigate().GoToUrl(url);
-                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail gmx.com này chưa được hỗ trợ!";
-                        
-                        return;
+                        Thread.Sleep(10000);
+                        url_re_pass = GetMail.doc_gmx_cham_com(driver, mail, pass);
                     }
-                    else if (mail.EndsWith("gmx.net"))
+                    else if (selectedIndex == 4)
                     {
-                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail gmx.net này chưa được hỗ trợ!";
-                        return;
+                        dataGridView1.Invoke(new Action(() =>
+                            dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail gmx.net này chưa được hỗ trợ!"
+                        ));
                     }
                     else
                     {
-                        dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail này chưa được hỗ trợ!";
-                        return;
+                        dataGridView1.Invoke(new Action(() =>
+                            dataGridView1.Rows[i].Cells["Status"].Value = "Loại mail này chưa được hỗ trợ!"
+                        ));
                     }
+
+
+
                     if (!string.IsNullOrEmpty(url_re_pass))
                     {
                         driver.Navigate().GoToUrl(url_re_pass);
@@ -481,6 +493,19 @@ namespace ToolsRestartPassApple
                         dataGridView1.Rows[i].Cells["Status"].Value = "Ko get được link Recover";
                         return;
                     }
+
+                    // có thể gặp nút tiếp tục khi chuyển link
+                    var warningIcons = driver.FindElements(By.XPath("//i[contains(@class, 'system-message_icon-type') and contains(@class, 'theme-icon-warn-40')]"));
+                    if (warningIcons.Count > 0) 
+                    {
+                        Thread.Sleep(3000);
+                        driver.FindElement(By.XPath("//a[contains(@class, 'button-primary') and @data-webdriver='executeManualRedirect']")).Click();
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Cells["Status"].Value = "Không tìm thấy nút tiếp tục khi chuyển link";
+                    }
+
                     dataGridView1.Rows[i].Cells["Status"].Value = "Đặt lại pass";
                     Thread.Sleep(4000);
 
@@ -732,65 +757,36 @@ namespace ToolsRestartPassApple
             }
         }
 
+        private string doc_mail_com(IWebDriver driver, string recoveryemail, string recoverypassword)
+        {
+            try
+            {
+                driver.Navigate().GoToUrl("https://www.mail.com/premiumlogin/#.7518-header-premiumlogin1-1");
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//input[@id='login-email']")).SendKeys(recoveryemail);
+                Thread.Sleep(1500);
+                driver.FindElement(By.XPath("//input[@id='login-password']")).SendKeys(recoverypassword);
+                Thread.Sleep(1500);
+                driver.FindElement(By.XPath("//button[@type='submit' and contains(@class, 'login-submit')]")).Click();
+                Thread.Sleep(5000);
+                string firstUrl = "https://www.youtube.com/watch?v=QlVtc1ImEDQ";
+                return firstUrl;
+            }
+            catch (Exception ex)
+            {
+                return $"Lỗi: {ex.Message}"; // Trả về lỗi nếu có
+            }
+        }
 
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
 
-        //    ChromeOptions options = new ChromeOptions();
-        //    options.AddArgument("--window-size=100,600");
-        //    options.AddArgument("--disable-notifications");
-        //    options.AddExcludedArgument("enable-automation");
-        //    options.AddArgument("--log-level=3");
-
-        //    ChromeDriverService service = ChromeDriverService.CreateDefaultService();
-        //    service.HideCommandPromptWindow = true;
-
-        //    IWebDriver driver = new ChromeDriver(service, options);
-        //    dang_nhap(driver, "pollmann.1976@freenet.de", "qQwer32154543#@");
-
-        //    try
-        //    {
-        //        Thread.Sleep(3000);
-        //        driver.SwitchTo().Frame(0);
-        //        Thread.Sleep(500);
-
-        //        var inputFields = driver.FindElements(By.XPath("//input[contains(@class, 'generic-input-field') and contains(@class, 'compact-input')]"));
-
-        //        if (inputFields.Count > 0) // Kiểm tra nếu có ít nhất một phần tử được tìm thấy
-        //        {
-        //            var inputField = inputFields[0]; // Lấy phần tử đầu tiên (nếu có)
-        //            Thread.Sleep(500);
-        //            Random rand = new Random();
-
-        //            int ngay = rand.Next(1, 29);
-        //            int thang = rand.Next(1, 13);
-        //            int nam = rand.Next(1985, 2007);
-
-        //            string thang_ngay_nam = $"{thang:D2}{ngay:D2}{nam}";
-        //            inputField.SendKeys(thang_ngay_nam);
-        //        }
-
-        //        // Tiếp tục chạy các dòng code tiếp theo nếu không tìm thấy thẻ input
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Lỗi: " + ex.Message);
-        //    }
-
-        //}
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string proxyHost = "103.161.17.15";
-            int proxyPort = 49337;
-            string proxyUsername = "user49337";
-            string proxyPassword = "wdkfyB4jJr";
-
             ChromeOptions options = new ChromeOptions();
 
             // Cấu hình Proxy
-            options.AddArgument($"--proxy-server={proxyHost}:{proxyPort}");
             options.AddArgument("--window-size=100,600");
             options.AddArgument("--disable-notifications");
             options.AddExcludedArgument("enable-automation");
@@ -801,13 +797,93 @@ namespace ToolsRestartPassApple
 
             IWebDriver driver = new ChromeDriver(service, options);
 
-            // Khởi tạo WebDriver
-            driver.Navigate().GoToUrl("http://example.com"); // Trang đầu để chạy script auth
+            //string aqqq = comboBox_loaimail.Text;
+            //string aa = comboBox_loaimail.SelectedIndex == 0;
 
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            //js.ExecuteScript($"window.open('http://{proxyUsername}:{proxyPassword}@{proxyHost}:{proxyPort}');");
 
-            //Console.WriteLine("Trình duyệt đã mở với proxy thành công.");
+            try
+            {
+                driver.Navigate().GoToUrl("https://www.gmx.com/#.1559516-header-navlogin1-2");
+
+                Thread.Sleep(5000);
+
+                if (IsElementExists(driver, "//iframe[@sandbox='allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts']"))
+                {
+                    Thread.Sleep(3000);
+                    IWebElement iframeElement3 = driver.FindElement(By.ClassName("permission-core-iframe"));
+                    driver.SwitchTo().Frame(iframeElement3);
+
+                    IWebElement iframeElement4 = driver.FindElement(By.XPath("//iframe[contains(@src, 'plus.gmx.com/lt')]"));
+                    driver.SwitchTo().Frame(iframeElement4);
+
+                    if (IsElementExists(driver, "//*[@id=\"onetrust-accept-btn-handler\"]"))
+                    {
+                        driver.FindElement(By.XPath("//*[@id=\"onetrust-accept-btn-handler\"]")).Click();
+                    }
+                    //Thread.Sleep(5000);
+                    driver.SwitchTo().DefaultContent();
+                }
+                else if (IsElementExists(driver, "//button[@aria-label=\"Close layer\"]"))
+                {
+                    driver.FindElement(By.XPath("//button[@aria-label=\"Close layer\"]")).Click();
+                }
+
+
+                Thread.Sleep(1000);
+                int attempts = 0;
+                while (attempts < 5)
+                {
+                    try
+                    {
+                        var emailInput = driver.FindElement(By.XPath("//input[@id='login-email']"));
+                        emailInput.SendKeys("marco90@caramail.com");
+                        Thread.Sleep(1000);
+                        break; 
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        attempts++;
+                        if (attempts < 5)
+                        {
+                            Thread.Sleep(3000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Không tìm thấy phần tử sau 5 lần thử.");
+                        }
+                    }
+                }
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//input[@id='login-password']")).SendKeys("Jotusutylana");
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//button[@type='submit' and contains(@class, 'login-submit')]")).Click();
+                
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//a[@data-item-name='mail']")).Click();
+
+
+                IWebElement iframeElement1 = driver.FindElement(By.XPath("//iframe[@name='mail']"));
+                driver.SwitchTo().Frame(iframeElement1);
+
+
+                Thread.Sleep(2000);
+                driver.FindElement(By.XPath("//tbody/tr[1]/td[2]")).Click();
+
+                Thread.Sleep(2000);
+                IWebElement iframeElement2 = driver.FindElement(By.XPath("//iframe[@name='mail-display-content']"));
+                driver.SwitchTo().Frame(iframeElement2);
+                Thread.Sleep(2000);
+                //driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]")).Click();
+                IWebElement linkElement = driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]"));
+                string link_re_pass = linkElement.GetAttribute("href");
+
+                //return link_re_pass;
+            }
+            catch (Exception ex)
+            {
+               // dataGridView1.Rows[i].Cells["Status"].Value = ex.Message;
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1310,6 +1386,27 @@ namespace ToolsRestartPassApple
         private void bnt_stop_Click(object sender, EventArgs e)
         {
             StopThread = true;
+        }
+
+        public static bool IsElementExists(IWebDriver driver, string xpath)
+        {
+            try
+            {
+                List<IWebElement> Element = new List<IWebElement>();
+                Element.AddRange(driver.FindElements(By.XPath(xpath)));
+                if (Element.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

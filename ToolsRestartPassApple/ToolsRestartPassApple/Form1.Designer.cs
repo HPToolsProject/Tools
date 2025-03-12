@@ -31,6 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CHECK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proxy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.từClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,10 +44,20 @@
             this.addProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.từVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.từFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.chọnTấtCảToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chọnBôiĐenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bỏChọnTấtCảToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xóaProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tongproxy = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dachon = new System.Windows.Forms.Label();
             this.Tong_so_mail = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.randompasscheck = new System.Windows.Forms.CheckBox();
             this.password = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,28 +75,15 @@
             this.cau_trl3 = new System.Windows.Forms.TextBox();
             this.cau_trl2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.CHECK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proxy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dachon = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.chọnTấtCảToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chọnBôiĐenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bỏChọnTấtCảToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.randompasscheck = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.Chieudai = new System.Windows.Forms.NumericUpDown();
             this.Chieurong = new System.Windows.Forms.NumericUpDown();
-            this.tongproxy = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.kotatchrome = new System.Windows.Forms.CheckBox();
-            this.xóaProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.comboBox_loaimail = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,13 +109,55 @@
             this.Proxy,
             this.Status});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 171);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 198);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(467, 395);
+            this.dataGridView1.Size = new System.Drawing.Size(467, 368);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // CHECK
+            // 
+            this.CHECK.FillWeight = 30F;
+            this.CHECK.HeaderText = "#";
+            this.CHECK.Name = "CHECK";
+            this.CHECK.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CHECK.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.CHECK.Width = 30;
+            // 
+            // STT
+            // 
+            this.STT.HeaderText = "STT";
+            this.STT.Name = "STT";
+            this.STT.Width = 40;
+            // 
+            // Mail
+            // 
+            this.Mail.FillWeight = 70F;
+            this.Mail.HeaderText = "Mail";
+            this.Mail.Name = "Mail";
+            this.Mail.Width = 70;
+            // 
+            // Pass
+            // 
+            this.Pass.FillWeight = 50F;
+            this.Pass.HeaderText = "Pass";
+            this.Pass.Name = "Pass";
+            this.Pass.Width = 50;
+            // 
+            // Proxy
+            // 
+            this.Proxy.FillWeight = 60F;
+            this.Proxy.HeaderText = "Proxy";
+            this.Proxy.Name = "Proxy";
+            this.Proxy.Width = 60;
+            // 
+            // Status
+            // 
+            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
             // 
             // contextMenuStrip1
             // 
@@ -139,14 +184,14 @@
             // từClipboardToolStripMenuItem
             // 
             this.từClipboardToolStripMenuItem.Name = "từClipboardToolStripMenuItem";
-            this.từClipboardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.từClipboardToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.từClipboardToolStripMenuItem.Text = "Từ Clipboard";
             this.từClipboardToolStripMenuItem.Click += new System.EventHandler(this.add_mail_clipboard);
             // 
             // từFileToolStripMenuItem
             // 
             this.từFileToolStripMenuItem.Name = "từFileToolStripMenuItem";
-            this.từFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.từFileToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.từFileToolStripMenuItem.Text = "Từ File";
             this.từFileToolStripMenuItem.Click += new System.EventHandler(this.add_mail_file);
             // 
@@ -162,16 +207,50 @@
             // từVToolStripMenuItem
             // 
             this.từVToolStripMenuItem.Name = "từVToolStripMenuItem";
-            this.từVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.từVToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.từVToolStripMenuItem.Text = "Từ Clipboard";
             this.từVToolStripMenuItem.Click += new System.EventHandler(this.add_proxy_clipboard);
             // 
             // từFileToolStripMenuItem1
             // 
             this.từFileToolStripMenuItem1.Name = "từFileToolStripMenuItem1";
-            this.từFileToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.từFileToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.từFileToolStripMenuItem1.Text = "Từ File";
             this.từFileToolStripMenuItem1.Click += new System.EventHandler(this.add_proxy_file);
+            // 
+            // chọnTấtCảToolStripMenuItem
+            // 
+            this.chọnTấtCảToolStripMenuItem.Name = "chọnTấtCảToolStripMenuItem";
+            this.chọnTấtCảToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.chọnTấtCảToolStripMenuItem.Text = "Chọn tất cả";
+            this.chọnTấtCảToolStripMenuItem.Click += new System.EventHandler(this.chọnTấtCảToolStripMenuItem_Click);
+            // 
+            // chọnBôiĐenToolStripMenuItem
+            // 
+            this.chọnBôiĐenToolStripMenuItem.Name = "chọnBôiĐenToolStripMenuItem";
+            this.chọnBôiĐenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.chọnBôiĐenToolStripMenuItem.Text = "Chọn bôi đen";
+            this.chọnBôiĐenToolStripMenuItem.Click += new System.EventHandler(this.chọnBôiĐenToolStripMenuItem_Click);
+            // 
+            // bỏChọnTấtCảToolStripMenuItem
+            // 
+            this.bỏChọnTấtCảToolStripMenuItem.Name = "bỏChọnTấtCảToolStripMenuItem";
+            this.bỏChọnTấtCảToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.bỏChọnTấtCảToolStripMenuItem.Text = "Bỏ chọn tất cả";
+            this.bỏChọnTấtCảToolStripMenuItem.Click += new System.EventHandler(this.bỏChọnTấtCảToolStripMenuItem_Click);
+            // 
+            // xóaToolStripMenuItem
+            // 
+            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
+            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.xóaToolStripMenuItem.Text = "Xóa đã chọn";
+            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
+            // 
+            // xóaProxyToolStripMenuItem
+            // 
+            this.xóaProxyToolStripMenuItem.Name = "xóaProxyToolStripMenuItem";
+            this.xóaProxyToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.xóaProxyToolStripMenuItem.Text = "Xóa proxy";
             // 
             // groupBox1
             // 
@@ -188,6 +267,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin";
             // 
+            // tongproxy
+            // 
+            this.tongproxy.AutoSize = true;
+            this.tongproxy.Location = new System.Drawing.Point(80, 59);
+            this.tongproxy.Name = "tongproxy";
+            this.tongproxy.Size = new System.Drawing.Size(13, 13);
+            this.tongproxy.TabIndex = 5;
+            this.tongproxy.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 59);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(80, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Tổng số proxy: ";
+            // 
+            // dachon
+            // 
+            this.dachon.AutoSize = true;
+            this.dachon.Location = new System.Drawing.Point(55, 38);
+            this.dachon.Name = "dachon";
+            this.dachon.Size = new System.Drawing.Size(13, 13);
+            this.dachon.TabIndex = 3;
+            this.dachon.Text = "0";
+            // 
             // Tong_so_mail
             // 
             this.Tong_so_mail.AutoSize = true;
@@ -197,6 +303,15 @@
             this.Tong_so_mail.TabIndex = 1;
             this.Tong_so_mail.Text = "0";
             this.Tong_so_mail.Click += new System.EventHandler(this.Tong_so_mail_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Đã chọn:";
             // 
             // label1
             // 
@@ -224,6 +339,17 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Setting ";
+            // 
+            // randompasscheck
+            // 
+            this.randompasscheck.AutoSize = true;
+            this.randompasscheck.Location = new System.Drawing.Point(65, 101);
+            this.randompasscheck.Name = "randompasscheck";
+            this.randompasscheck.Size = new System.Drawing.Size(100, 17);
+            this.randompasscheck.TabIndex = 7;
+            this.randompasscheck.Text = "Random pass ?";
+            this.randompasscheck.UseVisualStyleBackColor = true;
+            this.randompasscheck.CheckedChanged += new System.EventHandler(this.randompasscheck_CheckedChanged);
             // 
             // password
             // 
@@ -393,105 +519,6 @@
             this.label8.Size = new System.Drawing.Size(0, 13);
             this.label8.TabIndex = 1;
             // 
-            // CHECK
-            // 
-            this.CHECK.FillWeight = 30F;
-            this.CHECK.HeaderText = "#";
-            this.CHECK.Name = "CHECK";
-            this.CHECK.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CHECK.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.CHECK.Width = 30;
-            // 
-            // STT
-            // 
-            this.STT.HeaderText = "STT";
-            this.STT.Name = "STT";
-            this.STT.Width = 40;
-            // 
-            // Mail
-            // 
-            this.Mail.FillWeight = 70F;
-            this.Mail.HeaderText = "Mail";
-            this.Mail.Name = "Mail";
-            this.Mail.Width = 70;
-            // 
-            // Pass
-            // 
-            this.Pass.FillWeight = 50F;
-            this.Pass.HeaderText = "Pass";
-            this.Pass.Name = "Pass";
-            this.Pass.Width = 50;
-            // 
-            // Proxy
-            // 
-            this.Proxy.FillWeight = 60F;
-            this.Proxy.HeaderText = "Proxy";
-            this.Proxy.Name = "Proxy";
-            this.Proxy.Width = 60;
-            // 
-            // Status
-            // 
-            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            // 
-            // dachon
-            // 
-            this.dachon.AutoSize = true;
-            this.dachon.Location = new System.Drawing.Point(55, 38);
-            this.dachon.Name = "dachon";
-            this.dachon.Size = new System.Drawing.Size(13, 13);
-            this.dachon.TabIndex = 3;
-            this.dachon.Text = "0";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Đã chọn:";
-            // 
-            // chọnTấtCảToolStripMenuItem
-            // 
-            this.chọnTấtCảToolStripMenuItem.Name = "chọnTấtCảToolStripMenuItem";
-            this.chọnTấtCảToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.chọnTấtCảToolStripMenuItem.Text = "Chọn tất cả";
-            this.chọnTấtCảToolStripMenuItem.Click += new System.EventHandler(this.chọnTấtCảToolStripMenuItem_Click);
-            // 
-            // chọnBôiĐenToolStripMenuItem
-            // 
-            this.chọnBôiĐenToolStripMenuItem.Name = "chọnBôiĐenToolStripMenuItem";
-            this.chọnBôiĐenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.chọnBôiĐenToolStripMenuItem.Text = "Chọn bôi đen";
-            this.chọnBôiĐenToolStripMenuItem.Click += new System.EventHandler(this.chọnBôiĐenToolStripMenuItem_Click);
-            // 
-            // bỏChọnTấtCảToolStripMenuItem
-            // 
-            this.bỏChọnTấtCảToolStripMenuItem.Name = "bỏChọnTấtCảToolStripMenuItem";
-            this.bỏChọnTấtCảToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.bỏChọnTấtCảToolStripMenuItem.Text = "Bỏ chọn tất cả";
-            this.bỏChọnTấtCảToolStripMenuItem.Click += new System.EventHandler(this.bỏChọnTấtCảToolStripMenuItem_Click);
-            // 
-            // xóaToolStripMenuItem
-            // 
-            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
-            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.xóaToolStripMenuItem.Text = "Xóa đã chọn";
-            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
-            // 
-            // randompasscheck
-            // 
-            this.randompasscheck.AutoSize = true;
-            this.randompasscheck.Location = new System.Drawing.Point(65, 101);
-            this.randompasscheck.Name = "randompasscheck";
-            this.randompasscheck.Size = new System.Drawing.Size(100, 17);
-            this.randompasscheck.TabIndex = 7;
-            this.randompasscheck.Text = "Random pass ?";
-            this.randompasscheck.UseVisualStyleBackColor = true;
-            this.randompasscheck.CheckedChanged += new System.EventHandler(this.randompasscheck_CheckedChanged);
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -567,24 +594,6 @@
             0,
             0});
             // 
-            // tongproxy
-            // 
-            this.tongproxy.AutoSize = true;
-            this.tongproxy.Location = new System.Drawing.Point(80, 59);
-            this.tongproxy.Name = "tongproxy";
-            this.tongproxy.Size = new System.Drawing.Size(13, 13);
-            this.tongproxy.TabIndex = 5;
-            this.tongproxy.Text = "0";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 59);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 13);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Tổng số proxy: ";
-            // 
             // kotatchrome
             // 
             this.kotatchrome.AutoSize = true;
@@ -595,17 +604,48 @@
             this.kotatchrome.Text = "Ko tắt chrome";
             this.kotatchrome.UseVisualStyleBackColor = true;
             // 
-            // xóaProxyToolStripMenuItem
+            // button2
             // 
-            this.xóaProxyToolStripMenuItem.Name = "xóaProxyToolStripMenuItem";
-            this.xóaProxyToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.xóaProxyToolStripMenuItem.Text = "Xóa proxy";
+            this.button2.Location = new System.Drawing.Point(12, 158);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(68, 24);
+            this.button2.TabIndex = 455;
+            this.button2.Text = "test";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // comboBox_loaimail
+            // 
+            this.comboBox_loaimail.FormattingEnabled = true;
+            this.comboBox_loaimail.Items.AddRange(new object[] {
+            "Freneet",
+            "Mail.bg",
+            "Mail.com",
+            "Gmx.com",
+            "Gmx.net"});
+            this.comboBox_loaimail.Location = new System.Drawing.Point(307, 171);
+            this.comboBox_loaimail.Name = "comboBox_loaimail";
+            this.comboBox_loaimail.Size = new System.Drawing.Size(145, 21);
+            this.comboBox_loaimail.TabIndex = 456;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label10.Location = new System.Drawing.Point(227, 175);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(78, 13);
+            this.label10.TabIndex = 457;
+            this.label10.Text = "Chọn loại mail: ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 575);
+            this.Controls.Add(this.comboBox_loaimail);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.kotatchrome);
             this.Controls.Add(this.Chieurong);
             this.Controls.Add(this.Chieudai);
@@ -693,6 +733,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox kotatchrome;
         private System.Windows.Forms.ToolStripMenuItem xóaProxyToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox comboBox_loaimail;
+        private System.Windows.Forms.Label label10;
     }
 }
 

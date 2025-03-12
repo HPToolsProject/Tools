@@ -8,6 +8,9 @@ using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
 using MailKit.Security;
 using MailKit;
+using System.Xml.Linq;
+using OpenQA.Selenium;
+using System.Threading;
 
 namespace ToolsRestartPassApple
 {
@@ -210,6 +213,161 @@ namespace ToolsRestartPassApple
             }
 
             return null;
+        }
+
+
+
+
+        public static string doc_mail_cham_com(IWebDriver driver, string mail, string password)
+        {
+            try
+            {
+                driver.Navigate().GoToUrl("https://www.mail.com/premiumlogin/#.7518-header-premiumlogin1-1");
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//input[@id='login-email']")).SendKeys("gsj13@email.com");
+                Thread.Sleep(1500);
+                driver.FindElement(By.XPath("//input[@id='login-password']")).SendKeys("oY547V58Pf");
+                Thread.Sleep(1500);
+                driver.FindElement(By.XPath("//button[@type='submit' and contains(@class, 'login-submit')]")).Click();
+
+                Thread.Sleep(5000);
+                driver.FindElement(By.XPath("//a[@data-item-name='mail']")).Click();
+
+
+                IWebElement iframeElement1 = driver.FindElement(By.XPath("//iframe[@name='mail']"));
+                driver.SwitchTo().Frame(iframeElement1);
+
+
+                Thread.Sleep(2000);
+                driver.FindElement(By.XPath("//tbody/tr[1]/td[2]")).Click();
+
+                Thread.Sleep(2000);
+                IWebElement iframeElement2 = driver.FindElement(By.XPath("//iframe[@name='mail-display-content']"));
+                driver.SwitchTo().Frame(iframeElement2);
+                Thread.Sleep(2000);
+                //driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]")).Click();
+                IWebElement linkElement = driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]"));
+                string link_re_pass = linkElement.GetAttribute("href");
+
+                return link_re_pass;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"POP3 cũng thất bại. Lỗi: {ex.Message}");
+            }
+
+            return null;
+        }
+
+
+
+        public static string doc_gmx_cham_com(IWebDriver driver, string mail, string password)
+        {
+            try
+            {
+                driver.Navigate().GoToUrl("https://www.gmx.com/#.1559516-header-navlogin1-2");
+
+                Thread.Sleep(5000);
+
+                if (IsElementExists(driver, "//iframe[@sandbox='allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts']"))
+                {
+                    Thread.Sleep(3000);
+                    IWebElement iframeElement3 = driver.FindElement(By.ClassName("permission-core-iframe"));
+                    driver.SwitchTo().Frame(iframeElement3);
+
+                    IWebElement iframeElement4 = driver.FindElement(By.XPath("//iframe[contains(@src, 'plus.gmx.com/lt')]"));
+                    driver.SwitchTo().Frame(iframeElement4);
+
+                    if (IsElementExists(driver, "//*[@id=\"onetrust-accept-btn-handler\"]"))
+                    {
+                        driver.FindElement(By.XPath("//*[@id=\"onetrust-accept-btn-handler\"]")).Click();
+                    }
+                    //Thread.Sleep(5000);
+                    driver.SwitchTo().DefaultContent();
+                }
+                else if (IsElementExists(driver, "//button[@aria-label=\"Close layer\"]"))
+                {
+                    driver.FindElement(By.XPath("//button[@aria-label=\"Close layer\"]")).Click();
+                }
+
+
+                Thread.Sleep(1000);
+                int attempts = 0;
+                while (attempts < 5)
+                {
+                    try
+                    {
+                        var emailInput = driver.FindElement(By.XPath("//input[@id='login-email']"));
+                        emailInput.SendKeys("marco90@caramail.com");
+                        Thread.Sleep(1000);
+                        break;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        attempts++;
+                        if (attempts < 5)
+                        {
+                            Thread.Sleep(3000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Không tìm thấy phần tử sau 5 lần thử.");
+                        }
+                    }
+                }
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//input[@id='login-password']")).SendKeys("Jotusutylana");
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//button[@type='submit' and contains(@class, 'login-submit')]")).Click();
+
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("//a[@data-item-name='mail']")).Click();
+
+
+                IWebElement iframeElement1 = driver.FindElement(By.XPath("//iframe[@name='mail']"));
+                driver.SwitchTo().Frame(iframeElement1);
+
+
+                Thread.Sleep(2000);
+                driver.FindElement(By.XPath("//tbody/tr[1]/td[2]")).Click();
+
+                Thread.Sleep(2000);
+                IWebElement iframeElement2 = driver.FindElement(By.XPath("//iframe[@name='mail-display-content']"));
+                driver.SwitchTo().Frame(iframeElement2);
+                Thread.Sleep(2000);
+                //driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]")).Click();
+                IWebElement linkElement = driver.FindElement(By.XPath("//div[contains(@class, 'email-body')]/p[4]/a[1]"));
+                string link_re_pass = linkElement.GetAttribute("href");
+
+                return link_re_pass;
+            }
+            catch (Exception ex)
+            {
+                // dataGridView1.Rows[i].Cells["Status"].Value = ex.Message;
+            }
+
+            return null;
+        }
+
+        public static bool IsElementExists(IWebDriver driver, string xpath)
+        {
+            try
+            {
+                List<IWebElement> Element = new List<IWebElement>();
+                Element.AddRange(driver.FindElements(By.XPath(xpath)));
+                if (Element.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
